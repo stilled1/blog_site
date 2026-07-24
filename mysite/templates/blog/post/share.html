@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Поделиться постом — {{ post.title }}</title>
+</head>
+<body>
+    <div class="card">
+        <h1>Поделиться постом «{{ post.title }}»</h1>
+
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Отправить</button>
+        </form>
+    </div>
+</body>
+</html>
