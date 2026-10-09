@@ -1,0 +1,9 @@
+{% load blog_tags %}
+{% more_comments as comments %}
+<ul>
+    {% for post in comments %}
+        <li>
+            <a href="{{ post.get_absolute_url }}">{{ post.title }}</a>
+        </li>
+    {% endfor %}
+</ul>

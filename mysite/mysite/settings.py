@@ -12,7 +12,8 @@ https://docs.djangoproject.com/en/6.0/ref/settings/
 
 from pathlib import Path
 
-from django.conf.global_settings import STATICFILES_DIRS
+from django.conf.global_settings import STATICFILES_DIRS, LOGIN_REDIRECT_URL, LOGOUT_REDIRECT_URL, SESSION_COOKIE_AGE, \
+    MEDIA_ROOT, MEDIA_URL
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -29,6 +30,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+LOGIN_REDIRECT_URL = '/blog/'
+LOGOUT_REDIRECT_URL = '/blog/'
 
 # Application definition
 
@@ -39,7 +42,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'blog.apps.BlogConfig'
+    'blog.apps.BlogConfig',
+    'taggit',
+    'django.contrib.postgres',
+    'accounts.apps.AccountsConfig'
 ]
 
 MIDDLEWARE = [
@@ -77,8 +83,12 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'blog',
+        'USER': 'blog',
+        'PASSWORD': 'kokokola77',
+        'HOST': '127.0.0.1',
+        'PORT': '5432'
     }
 }
 
@@ -129,3 +139,10 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 SERVER_EMAIL = EMAIL_HOST_USER
+
+SESSION_COOKIE_AGE = 60 * 60 * 24 * 14
+
+LOGIN_URL = '/accounts/login/'
+
+MEDIA_ROOT = BASE_DIR / 'media'
+MEDIA_URL = 'media/'

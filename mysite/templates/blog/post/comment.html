@@ -1,0 +1,14 @@
+{% extends 'blog/base.html' %}
+{% block title %} Комментарий {% endblock %}
+<h1> {{post.title}} </h1>
+{% block content %}
+{% if comment %}
+    <h2>Ваш комментарий уже добавлен</h2>
+{% else %}
+    {% include 'blog/post/includes/comment_form.html' %}
+
+{% endif %}
+    <p><a href="{{ post.get_absolute_url }}">Вернуться к посту</a></p>
+
+{% endblock %}
+
