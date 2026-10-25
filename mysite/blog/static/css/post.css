@@ -125,3 +125,38 @@ pre code.hljs { background: transparent; padding: 1.1rem 1.25rem; }
     transition: background .15s, color .15s;
 }
 .pagination a:hover { background: var(--accent); color: #fff; }
+
+/* ссылка на автора: эффект «маркер» */
+.author-link {
+    padding: .05em .3em;
+    margin: 0 -.15em;
+    border-radius: 4px;
+    color: var(--accent-strong);
+    font-weight: 600;
+    text-decoration: none;
+    background-image:
+        linear-gradient(var(--accent), var(--accent)),
+        linear-gradient(var(--accent-soft), var(--accent-soft));
+    background-repeat: no-repeat;
+    background-position: left bottom, left bottom;
+    background-size: 100% 2px, 100% 0;
+    transition: background-size .28s cubic-bezier(.2, .8, .2, 1), color .2s;
+}
+.author-link::after {
+    content: "→";
+    display: inline-block;
+    margin-left: .2em;
+    opacity: 0;
+    transform: translateX(-6px);
+    transition: opacity .2s, transform .28s cubic-bezier(.2, .8, .2, 1);
+}
+.author-link:hover,
+.author-link:focus-visible {
+    color: var(--ink);
+    background-size: 100% 2px, 100% 100%;
+}
+.author-link:hover::after,
+.author-link:focus-visible::after {
+    opacity: 1;
+    transform: none;
+}

@@ -1,12 +1,14 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.views import LoginView
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import CreateView
 from django.contrib import auth
 from django.urls import  reverse_lazy
 from .forms import SignUpForm, LoginForm, UpdateUserForm, UpdateProfileForm
 from  django.contrib import messages
+from blog.models import Post
+from django.contrib.auth.models import User
 # Create your views here.
 class SignUpView(CreateView):
     form_class = SignUpForm
@@ -62,3 +64,15 @@ def profile(request):
     return render(request, 'registration/profile.html', {'user_form': user_form,
                                             'profile_form': profile_form})
 
+
+
+def author_profile(request, username):
+    author = get_object_or_404(User, username=username)
+
+    posts = Post.published.filter(author=author)
+
+    return render(request, 'registration/author_profile.html', {
+        'author': author,
+        'profile': profile,
+        'posts': posts,
+    })
