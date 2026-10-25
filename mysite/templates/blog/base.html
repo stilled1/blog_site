@@ -26,6 +26,15 @@
             {% csrf_token %}
             <button type="submit">Выход</button>
         </form>
+
+        <a href="{% url 'user-profile' %}" class="btn-back btn-profile">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                <circle cx="8" cy="5.5" r="2.75" stroke="currentColor" stroke-width="1.6"/>
+                <path d="M2.75 13.5c.8-2.4 2.9-3.75 5.25-3.75s4.45 1.35 5.25 3.75"
+                      stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+            </svg>
+            Мой профиль
+        </a>
         <a href="{% url 'blog:post_create' %}" class="btn-new">
         <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
             <path d="M8 3v10M3 8h10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>

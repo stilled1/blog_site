@@ -233,3 +233,13 @@ body:has(> #sidebar) {
     outline-offset: 2px;
 }
 .btn-back svg { flex-shrink: 0; transition: transform .15s; }
+
+
+/* кнопка «Мой профиль» в сайдбаре: btn-back на всю ширину */
+.btn-profile {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin: 0 0 .8rem;
+}
+.btn-profile:hover svg { transform: none; }
