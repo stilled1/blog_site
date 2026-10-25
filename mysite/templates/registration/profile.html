@@ -36,7 +36,7 @@
                         {{ user_form.email }}
                     </div>
                     <hr>
-                    <div><a href="#">Поменять пароль</a>
+                    <div><a href="{% url 'password_change' %}">Поменять пароль</a>
                         <hr>
                         <label>Поменять аватарку:</label>
                         {{ profile_form.avatar }}

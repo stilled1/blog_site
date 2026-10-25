@@ -243,3 +243,63 @@ body:has(> #sidebar) {
     margin: 0 0 .8rem;
 }
 .btn-profile:hover svg { transform: none; }
+
+/* ---------- flash-сообщения Django (messages) ---------- */
+#content .messages {
+    list-style: none;
+    max-width: 36rem;
+    margin: 0 0 1.5rem;
+    padding: 0;
+}
+#content .message {
+    display: flex;
+    align-items: center;
+    gap: .7rem;
+    margin: 0 0 .6rem;
+    padding: .85rem 1.1rem;
+    background: var(--panel);
+    border-left: 4px solid var(--line-strong);
+    border-radius: 0 var(--radius) var(--radius) 0;
+    color: var(--ink);
+    font-weight: 600;
+    font-size: .95rem;
+    animation: message-in .25s ease-out;
+}
+/* значок в кружке слева */
+#content .message::before {
+    flex-shrink: 0;
+    display: grid;
+    place-items: center;
+    width: 1.4rem;
+    height: 1.4rem;
+    border-radius: 50%;
+    background: var(--muted);
+    color: #fff;
+    font-size: .8rem;
+    line-height: 1;
+    content: "i";
+}
+
+/* успех */
+#content .message-success {
+    background: var(--accent-soft);
+    border-left-color: var(--accent);
+    color: var(--accent-strong);
+}
+#content .message-success::before { content: "✓"; background: var(--accent); }
+
+/* ошибка */
+#content .message-error {
+    background: var(--danger-soft);
+    border-left-color: var(--danger);
+    color: var(--danger);
+}
+#content .message-error::before { content: "!"; background: var(--danger); }
+
+@keyframes message-in {
+    from { opacity: 0; transform: translateY(-6px); }
+    to   { opacity: 1; transform: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+    #content .message { animation: none; }
+}
