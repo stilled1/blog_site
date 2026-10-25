@@ -1,0 +1,127 @@
+/* ==========================================================
+   post.css — список постов, пост, теги, комментарии,
+   пагинация, код (highlight.js)
+   ========================================================== */
+
+/* комфортная длина строки для чтения */
+#content :is(p, ul, ol, blockquote) { max-width: 68ch; }
+#content p { margin: 0 0 1.1em; }
+#content :is(ul, ol) { padding-left: 1.4rem; margin: 0 0 1.2em; }
+#content li { margin: .25em 0; }
+
+/* дата и автор */
+.date {
+    color: var(--muted);
+    font-size: .9rem;
+    margin: -.2rem 0 1rem !important;
+}
+
+/* теги */
+.tags {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: .4rem .5rem;
+    color: var(--muted);
+    font-size: .88rem;
+    margin: -.2rem 0 .6rem !important;
+}
+.tags a {
+    padding: .1rem .7rem;
+    background: var(--accent-soft);
+    color: var(--accent-strong);
+    border-radius: 999px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: background .15s, color .15s;
+}
+.tags a:hover { background: var(--accent); color: #fff; }
+
+/* содержимое поста (markdown) */
+#content img {
+    max-width: 100%;
+    height: auto;
+    border-radius: var(--radius);
+}
+#content blockquote {
+    margin: 1.4em 0;
+    padding: .2rem 1.2rem;
+    border-left: 4px solid var(--accent);
+    background: var(--panel);
+    border-radius: 0 var(--radius) var(--radius) 0;
+    color: var(--muted);
+}
+#content blockquote p:last-child { margin-bottom: 0; }
+
+#content table {
+    display: block;
+    max-width: 100%;
+    overflow-x: auto;
+    border-collapse: collapse;
+    margin: 1.4em 0;
+    font-size: .95rem;
+}
+#content :is(th, td) {
+    padding: .5rem .85rem;
+    border: 1px solid var(--line);
+    text-align: left;
+}
+#content th { background: var(--panel); }
+
+/* код */
+code, pre { font-family: var(--font-mono); }
+:not(pre) > code {
+    padding: .12em .4em;
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 5px;
+    font-size: .9em;
+}
+pre {
+    margin: 1.4em 0;
+    overflow-x: auto;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: #f6f8f8;
+    font-size: .9rem;
+    line-height: 1.55;
+}
+pre code.hljs { background: transparent; padding: 1.1rem 1.25rem; }
+
+/* комментарии */
+.comment {
+    margin: 1.1rem 0;
+    padding: .9rem 1.2rem;
+    background: var(--panel);
+    border-left: 4px solid var(--accent);
+    border-radius: 0 var(--radius) var(--radius) 0;
+}
+.comment .info {
+    margin: 0 0 .45rem;
+    color: var(--muted);
+    font-size: .85rem;
+}
+.comment p:last-child { margin-bottom: 0; }
+
+/* пагинация */
+.pagination {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 3rem;
+    padding-top: 1.4rem;
+    border-top: 1px solid var(--line);
+}
+.pagination .current { color: var(--muted); font-size: .92rem; }
+.pagination a {
+    display: inline-block;
+    padding: .5rem 1.1rem;
+    border: 1px solid var(--accent);
+    border-radius: 999px;
+    color: var(--accent);
+    font-weight: 600;
+    text-decoration: none;
+    transition: background .15s, color .15s;
+}
+.pagination a:hover { background: var(--accent); color: #fff; }

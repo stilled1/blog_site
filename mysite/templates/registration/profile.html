@@ -1,6 +1,13 @@
 {% extends "blog/base.html" %}
 {% block title %}Профиль{% endblock title %}
 {% block content %}
+    <a href="{% url 'blog:post_list' %}" class="btn-back">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+            <path d="M10 3L5 8l5 5" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        Вернуться ко всем постам
+    </a>
     <div>
         <img src="{{ user.profile.avatar.url }} " style="cursor: pointer;"/>
     </div>
@@ -29,7 +36,7 @@
                         {{ user_form.email }}
                     </div>
                     <hr>
-                    <div><a href="#">Change Password</a>
+                    <div><a href="#">Поменять пароль</a>
                         <hr>
                         <label>Поменять аватарку:</label>
                         {{ profile_form.avatar }}
@@ -39,8 +46,8 @@
                 </div>
             </div>
             <br><br>
-            <button type="submit">Save Changes</button>
-            <button type="reset">Reset</button>
+            <button type="submit">Сохранить изменения</button>
+            <button type="reset">Сбросить</button>
         </form>
     </div>
 {% endblock content %}

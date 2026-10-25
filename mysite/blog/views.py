@@ -1,6 +1,7 @@
 from django.conf import settings
+from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseNotFound, Http404
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.views.generic import ListView
 from . import forms
 from taggit.models import Tag
@@ -10,7 +11,13 @@ from django.core.mail import send_mail
 from mysite import settings
 from django.views.decorators.http import require_POST
 from django.db.models import Count
+from .forms import PostForm
+from django.utils.text import slugify
 # Create your views here.
+TRANSLIT = {'а': 'a', 'б': 'b', 'в': 'v', 'г': 'g', 'д': 'd', 'е': 'e', 'ё': 'e', 'ж': 'zh', 'з': 'z', 'и': 'i',
+            'й': 'y', 'к': 'k', 'л': 'l', 'м': 'm', 'н': 'n', 'о': 'o', 'п': 'p', 'р': 'r', 'с': 's', 'т': 't',
+            'у': 'u', 'ф': 'f', 'х': 'h', 'ц': 'ts', 'ч': 'ch', 'ш': 'sh', 'щ': 'sch', 'ъ': '', 'ы': 'y', 'ь': '',
+            'э': 'e', 'ю': 'yu', 'я': 'ya', }
 
 def post_list(request, tag_slug=None):
     post_list = Post.objects.all()
@@ -89,3 +96,42 @@ def post_share(request, post_id):
 
     return render(request, 'blog/post/share.html', {'post': post,'form': form,'sent': sent})
 
+def make_uniq_slug(title):
+    result = ''
+    for t in title.lower():
+        result += TRANSLIT.get(t, t)
+
+    result = slugify(result)
+    count = 2
+    slug = result
+    while Post.objects.filter(slug=result).exists() :
+        result = slug + f'-{count}'
+        count += 1
+
+    return result
+
+@login_required
+def create_post(request):
+    post = None
+    if request.method == 'POST':
+        form = PostForm(request.POST)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.author = request.user
+            post.slug = make_uniq_slug(post.title)
+            post.save()
+            form.save_m2m()
+
+            if post.status == Post.Status.PUBLISHED:
+                return redirect(to=post.get_absolute_url())
+
+            return redirect(to='blog:post_list')
+
+    else:
+        form = PostForm(initial={'status': Post.Status.PUBLISHED})
+
+
+    return render(request, 'blog/post/create_post.html', {
+        'form': form,
+        'post': post
+    })

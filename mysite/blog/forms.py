@@ -12,3 +12,13 @@ class CommentForm(forms.ModelForm):
         fields = ['name', 'email', 'message']
 
 
+class PostForm(forms.ModelForm):
+    class Meta:
+        model = models.Post
+        fields = ['title', 'body', 'tags', 'status']
+        labels = {
+            'title': 'Название',
+            'body': 'Описание',
+            'tag': 'Тэги (через ",")',
+            'status': 'Статус'
+        }

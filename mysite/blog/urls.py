@@ -9,5 +9,6 @@ urlpatterns = [
     path('tag/<str:tag_slug>/', views.post_list, name='post_list_by_tag'),
     path('<int:year>/<int:month>/<int:day>/<slug:slug>/', views.post_detail, name='post_detail'),
     path('<int:post_id>/share/', views.post_share, name='post_share'),
-    path('<int:post_id>/comment/', views.post_comment, name='post_comment')
+    path('<int:post_id>/comment/', views.post_comment, name='post_comment'),
+    path('new_post/', views.create_post, name='post_create')
 ]
