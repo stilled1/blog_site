@@ -31,7 +31,7 @@ class UpdateUserForm(forms.ModelForm):
 
 class UpdateProfileForm(forms.ModelForm):
     avatar = forms.ImageField(widget=forms.FileInput())
-    bio = forms.CharField(max_length=255, widget=forms.Textarea(attrs={'rows': 5}))
+    bio = forms.CharField(max_length=255, widget=forms.Textarea(attrs={'rows': 5}), required=False)
 
     class Meta:
         model = User
