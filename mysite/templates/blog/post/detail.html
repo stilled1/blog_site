@@ -5,7 +5,8 @@
     <a href="{% url 'blog:post_list' %}" class="btn-back"> <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"> <path d="M10 3L5 8l5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/> </svg> Вернуться ко всем постам </a>
     <h1>{{ post.title }}</h1>
     <p class="date">
-            Published {{ post.publish }} by {{ post.author }}
+        Published {{ post.publish }} by
+        <a href="{% url 'author-profile' post.author.username %}" class="author-link">{{ post.author }}</a>
     </p>
     {{ post.body|markdown }}
     <p>
