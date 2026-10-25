@@ -1,0 +1,38 @@
+{% extends "blog/base.html" %}
+{% block title %}{{ author.username }}{% endblock title %}
+
+{% block content %}
+    <a href="{% url 'blog:post_list' %}" class="btn-back">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+            <path d="M10 3L5 8l5 5" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        Вернуться ко всем постам
+    </a>
+
+    {% if profile and profile.avatar %}
+        <img src="{{ profile.avatar.url }}" alt="Аватар {{ author.username }}" class="avatar">
+    {% endif %}
+
+    <h1>{{ author.username }}</h1>
+
+    {% if profile and profile.bio %}
+        <p>{{ profile.bio|linebreaksbr }}</p>
+    {% else %}
+        <p class="date">Автор пока ничего о себе не рассказал.</p>
+    {% endif %}
+
+    <p class="date">Опубликовано постов: {{ posts|length }}</p>
+
+    {% if user == author %}
+        <a href="{% url 'user-profile' %}" class="btn-back">Редактировать профиль</a>
+    {% endif %}
+
+    {% for post in posts %}
+        <h2><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h2>
+        <p class="date">Published {{ post.publish }}</p>
+        {{ post.body|truncatewords:30|linebreaks }}
+    {% empty %}
+        <p>У автора пока нет опубликованных постов.</p>
+    {% endfor %}
+{% endblock content %}
