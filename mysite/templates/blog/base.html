@@ -26,6 +26,12 @@
             {% csrf_token %}
             <button type="submit">Выход</button>
         </form>
+        <a href="{% url 'blog:post_create' %}" class="btn-new">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+            <path d="M8 3v10M3 8h10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+        Новый пост
+        </a>
     {% else %}
         <p>Вы не вошли</p>
         <a href="{% url 'login' %}">Войти</a>

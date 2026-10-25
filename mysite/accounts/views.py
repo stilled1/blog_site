@@ -41,13 +41,13 @@ class CustomLoginView(LoginView):
             self.request.session.set_expiry(0)
             self.request.session.modified = True
 
-        return super(LoginView, self).form_valid(form)
+        return super(CustomLoginView, self).form_valid(form)
 
 @login_required
 def profile(request):
     if request.method == 'POST':
         user_form = UpdateUserForm(request.POST, instance=request.user)
-        profile_form = UpdateProfileForm(request.POST, request.files, instance=request.user.profile)
+        profile_form = UpdateProfileForm(request.POST, request.FILES, instance=request.user.profile)
 
         if user_form.is_valid() and profile_form.is_valid():
             user_form.save()

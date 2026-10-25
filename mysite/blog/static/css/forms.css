@@ -1,0 +1,157 @@
+/* ==========================================================
+   forms.css — формы, кнопки, вход/регистрация, профиль,
+   страница «Поделиться постом»
+   ========================================================== */
+
+form p { margin: 0 0 1.2rem; }
+
+label {
+    display: block;
+    margin-bottom: .3rem;
+    font-weight: 600;
+    font-size: .92rem;
+}
+
+/* поля ввода */
+input:not([type="checkbox"], [type="radio"], [type="submit"],
+          [type="button"], [type="reset"], [type="file"], [type="hidden"]),
+textarea,
+select {
+    display: block;
+    width: 100%;
+    max-width: 34rem;
+    margin-top: .3rem;
+    padding: .65rem .85rem;
+    background: var(--surface);
+    color: var(--ink);
+    border: 1px solid var(--line-strong);
+    border-radius: 8px;
+    font: inherit;
+    transition: border-color .15s, box-shadow .15s;
+}
+textarea { min-height: 8rem; resize: vertical; }
+
+input:focus, textarea:focus, select:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px var(--accent-soft);
+}
+
+input[type="file"] { display: block; margin-top: .3rem; font-size: .9rem; }
+input[type="checkbox"], input[type="radio"] {
+    accent-color: var(--accent);
+    width: 1.05rem;
+    height: 1.05rem;
+    vertical-align: -.15em;
+}
+
+/* подсказки и ошибки Django */
+.helptext, .helptext ul { color: var(--muted); font-size: .85rem; }
+.helptext { display: block; margin-top: .3rem; max-width: 34rem; }
+.helptext ul { margin: .3rem 0 0; padding-left: 1.1rem; }
+
+ul.errorlist {
+    list-style: none;
+    margin: 0 0 .5rem;
+    padding: 0;
+    color: var(--danger);
+    font-size: .9rem;
+    font-weight: 600;
+}
+
+/* кнопки */
+button,
+input[type="submit"],
+input[type="button"],
+input[type="reset"] {
+    display: inline-block;
+    padding: .65rem 1.4rem;
+    background: var(--accent);
+    color: #fff;
+    border: 1px solid var(--accent);
+    border-radius: 8px;
+    font: 600 .95rem/1.2 var(--font-ui);
+    cursor: pointer;
+    transition: background .15s, color .15s, border-color .15s;
+}
+button:hover,
+input[type="submit"]:hover,
+input[type="button"]:hover {
+    background: var(--accent-strong);
+    border-color: var(--accent-strong);
+}
+button:active, input[type="submit"]:active { transform: translateY(1px); }
+
+/* второстепенные кнопки */
+button[type="reset"],
+input[type="reset"],
+#sidebar button {
+    background: transparent;
+    color: var(--accent);
+}
+button[type="reset"]:hover,
+input[type="reset"]:hover,
+#sidebar button:hover {
+    background: var(--accent-soft);
+    color: var(--accent-strong);
+    border-color: var(--accent-strong);
+}
+#sidebar button { padding: .45rem 1rem; font-size: .88rem; }
+form button + button { margin-left: .5rem; }
+
+/* вход, регистрация, сброс пароля: ссылка под формой */
+form + a, form + p { display: inline-block; margin-top: 1.4rem; }
+
+/* профиль */
+.form-content { max-width: 36rem; }
+
+#content img[style*="cursor"] {
+    display: block;
+    width: 9rem;
+    height: 9rem;
+    margin-bottom: 1.8rem;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 4px solid var(--surface);
+    box-shadow: 0 0 0 2px var(--accent);
+}
+
+/* блок ошибок на странице профиля */
+[role="alert"] {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1rem;
+    max-width: 36rem;
+    margin-bottom: 1.5rem;
+    padding: .9rem 1.1rem;
+    background: var(--danger-soft);
+    border-left: 4px solid var(--danger);
+    border-radius: 0 var(--radius) var(--radius) 0;
+    color: var(--danger);
+}
+[role="alert"] strong { display: block; font-weight: 600; }
+[role="alert"] button {
+    padding: 0 .4rem;
+    background: transparent;
+    border: 0;
+    color: var(--danger);
+    font-size: 1.5rem;
+    line-height: 1;
+}
+[role="alert"] button:hover { background: transparent; color: var(--ink); }
+
+/* страница «Поделиться постом» (share.html) */
+.card {
+    max-width: 34rem;
+    margin: 4rem auto;
+    padding: 2rem 2rem 1.6rem;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+}
+.card h1 { font-size: 1.7rem; }
+
+@media (max-width: 52rem) {
+    .card { margin: 1.5rem 1rem; padding: 1.4rem; }
+}

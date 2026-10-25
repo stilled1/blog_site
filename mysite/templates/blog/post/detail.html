@@ -2,6 +2,7 @@
 {% load blog_tags %}
 {% block title %}  {{ post.title }} {% endblock %}
 {% block content %}
+    <a href="{% url 'blog:post_list' %}" class="btn-back"> <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"> <path d="M10 3L5 8l5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/> </svg> Вернуться ко всем постам </a>
     <h1>{{ post.title }}</h1>
     <p class="date">
             Published {{ post.publish }} by {{ post.author }}
@@ -32,9 +33,10 @@
         </div>
     {% empty %}
         <p>Пока нет комментариев</p>
+    {% endfor %}
 
     {% include "blog/post/includes/comment_form.html" %}
 
-    {% endfor %}
+
 
 {% endblock %}
