@@ -9,4 +9,15 @@
     <input type="submit" value="Войти">
 
 </form>
+
+<form action="{% url 'social:begin' 'github' %}" method="post" style="display:inline;">
+        {% csrf_token %}
+        <a href="#" onclick="parentNode.submit();">Войти через GitHub</a>
+</form>
+
+<form action="{% url 'social:begin' 'google-oauth2' %}" method="post" style="display:inline;">
+        {% csrf_token %}
+        <a href="#" onclick="parentNode.submit();">Войти через Google</a>
+    </form>
 {% endblock %}
+
