@@ -1,6 +1,7 @@
 from django.db.models import QuerySet
 from django.http import Http404
 from django.shortcuts import render
+from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.status import HTTP_404_NOT_FOUND
 from rest_framework.views import APIView
 from blog.models import Post
@@ -69,10 +70,20 @@ class PostDetail(APIView):
 
 class PostList(generics.ListCreateAPIView):
     serializer_class = PostSerializer
-    def get_queryset(self):
-        user = self.request.user
-        return Post.objects.filter(author=user)
+    queryset = Post.objects.all()
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ['author']
+    # def get_queryset(self):
+    #     user = self.request.user
+    #     return Post.objects.filter(author=user)
 
 class PostDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Post.objects.all()
     serializer_class = PostSerializer
+
+
+class UserPostList(generics.ListAPIView):
+    serializer_class = PostSerializer
+    def get_queryset(self):
+        user_id=self.kwargs['id']
+        return Post.objects.filter(author=user_id)

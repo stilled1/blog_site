@@ -25,5 +25,6 @@ urlpatterns = [
     path('accounts/', include('django.contrib.auth.urls')),
     path('blog/', include('blog.urls', namespace='blog')),
     path('api/', include('blog_api.urls', namespace='blog_api')),
-    path('oauth/', include('social_django.urls', namespace='social'))
+    path('oauth/', include('social_django.urls', namespace='social')),
+    path('api-auth/', include('rest_framework.urls'))
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
